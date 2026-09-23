@@ -1,0 +1,178 @@
+{
+  "comment": "Files copied verbatim from other repositories. Never edit them here; refresh them with test/mini/tools/vendor_files.py sync <source>, which also updates the commit below. 'shipped' is false for host-test-only copies.",
+  "sources": {
+    "telephony_call_manager": {
+      "url": "https://gitcode.com/openharmony/telephony_call_manager.git",
+      "commit": "24e1785fc0b310052329151df481e6e6c88754c9",
+      "defaultCheckout": "../telephony_call_manager"
+    },
+    "core_service": {
+      "url": "https://github.com/openharmony/telephony_core_service.git",
+      "commit": "60b603ea5fd7bda9d81808a05a444647b2bc8dd5",
+      "defaultCheckout": "../.deps/core_service"
+    },
+    "c_utils": {
+      "url": "https://github.com/openharmony/commonlibrary_c_utils.git",
+      "commit": "3bdc11e00e7bf6e577cee300ad51045ca9958efd",
+      "defaultCheckout": "../.deps/c_utils"
+    }
+  },
+  "files": [
+    {
+      "path": "LICENSE",
+      "source": "telephony_call_manager",
+      "sourcePath": "LICENSE",
+      "shipped": true
+    },
+    {
+      "path": "interfaces/innerkits/call_manager_base.h",
+      "source": "telephony_call_manager",
+      "sourcePath": "interfaces/innerkits/call_manager_base.h",
+      "shipped": true
+    },
+    {
+      "path": "interfaces/innerkits/call_manager_callback.h",
+      "source": "telephony_call_manager",
+      "sourcePath": "interfaces/innerkits/call_manager_callback.h",
+      "shipped": true
+    },
+    {
+      "path": "interfaces/innerkits/call_manager_client.h",
+      "source": "telephony_call_manager",
+      "sourcePath": "interfaces/innerkits/call_manager_client.h",
+      "shipped": true
+    },
+    {
+      "path": "interfaces/innerkits/call_manager_disconnected_details.h",
+      "source": "telephony_call_manager",
+      "sourcePath": "interfaces/innerkits/call_manager_disconnected_details.h",
+      "shipped": true
+    },
+    {
+      "path": "interfaces/innerkits/call_manager_errors.h",
+      "source": "telephony_call_manager",
+      "sourcePath": "interfaces/innerkits/call_manager_errors.h",
+      "shipped": true
+    },
+    {
+      "path": "interfaces/innerkits/call_manager_info.h",
+      "source": "telephony_call_manager",
+      "sourcePath": "interfaces/innerkits/call_manager_info.h",
+      "shipped": true
+    },
+    {
+      "path": "interfaces/innerkits/call_manager_inner_type.h",
+      "source": "telephony_call_manager",
+      "sourcePath": "interfaces/innerkits/call_manager_inner_type.h",
+      "shipped": true
+    },
+    {
+      "path": "interfaces/innerkits/i_call_status_callback.h",
+      "source": "telephony_call_manager",
+      "sourcePath": "interfaces/innerkits/i_call_status_callback.h",
+      "shipped": true
+    },
+    {
+      "path": "interfaces/innerkits/transfer_control.h",
+      "source": "telephony_call_manager",
+      "sourcePath": "interfaces/innerkits/transfer_control.h",
+      "shipped": true
+    },
+    {
+      "path": "interfaces/innerkits/voip_call_manager_info.h",
+      "source": "telephony_call_manager",
+      "sourcePath": "interfaces/innerkits/voip_call_manager_info.h",
+      "shipped": true
+    },
+    {
+      "path": "frameworks/native/src/call_manager_client.cpp",
+      "source": "telephony_call_manager",
+      "sourcePath": "frameworks/native/src/call_manager_client.cpp",
+      "shipped": true
+    },
+    {
+      "path": "utils/mini/include/errors.h",
+      "source": "c_utils",
+      "sourcePath": "base/include/errors.h",
+      "shipped": true
+    },
+    {
+      "path": "test/mini/stub/telephony_errors.h",
+      "source": "core_service",
+      "sourcePath": "interfaces/innerkits/include/telephony_errors.h",
+      "shipped": false
+    },
+    {
+      "path": "services/call/include/call_base.h",
+      "source": "telephony_call_manager",
+      "sourcePath": "services/call/include/call_base.h",
+      "shipped": true
+    },
+    {
+      "path": "services/call/include/carrier_call.h",
+      "source": "telephony_call_manager",
+      "sourcePath": "services/call/include/carrier_call.h",
+      "shipped": true
+    },
+    {
+      "path": "services/call/include/cs_call.h",
+      "source": "telephony_call_manager",
+      "sourcePath": "services/call/include/cs_call.h",
+      "shipped": true
+    },
+    {
+      "path": "services/call/include/conference_base.h",
+      "source": "telephony_call_manager",
+      "sourcePath": "services/call/include/conference_base.h",
+      "shipped": true
+    },
+    {
+      "path": "services/call/include/cs_conference.h",
+      "source": "telephony_call_manager",
+      "sourcePath": "services/call/include/cs_conference.h",
+      "shipped": true
+    },
+    {
+      "path": "services/call/include/ims_conference.h",
+      "source": "telephony_call_manager",
+      "sourcePath": "services/call/include/ims_conference.h",
+      "shipped": true
+    },
+    {
+      "path": "services/call/include/common_type.h",
+      "source": "telephony_call_manager",
+      "sourcePath": "services/call/include/common_type.h",
+      "shipped": true
+    },
+    {
+      "path": "services/call/include/call_object_manager.h",
+      "source": "telephony_call_manager",
+      "sourcePath": "services/call/include/call_object_manager.h",
+      "shipped": true
+    },
+    {
+      "path": "services/call/include/call_state_listener_base.h",
+      "source": "telephony_call_manager",
+      "sourcePath": "services/call/include/call_state_listener_base.h",
+      "shipped": true
+    },
+    {
+      "path": "services/call/include/call_state_listener.h",
+      "source": "telephony_call_manager",
+      "sourcePath": "services/call/include/call_state_listener.h",
+      "shipped": true
+    },
+    {
+      "path": "services/call/include/call_status_policy.h",
+      "source": "telephony_call_manager",
+      "sourcePath": "services/call/include/call_status_policy.h",
+      "shipped": true
+    },
+    {
+      "path": "services/call/include/call_request_process.h",
+      "source": "telephony_call_manager",
+      "sourcePath": "services/call/include/call_request_process.h",
+      "shipped": true
+    }
+  ]
+}

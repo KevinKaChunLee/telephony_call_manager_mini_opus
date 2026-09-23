@@ -1,0 +1,79 @@
+{
+  "name": "@ohos/call_manager_mini",
+  "description": "Call manager for LiteOS-M mini systems: CS/IMS voice calls served by one samgr_lite service",
+  "version": "4.0",
+  "license": "Apache License 2.0",
+  "publishAs": "code-segment",
+  "segment": {
+    "destPath": "base/telephony/call_manager_mini"
+  },
+  "dirs": {},
+  "scripts": {},
+  "component": {
+    "name": "call_manager_mini",
+    "subsystem": "telephony",
+    "syscap": [],
+    "features": [
+      "call_manager_mini_task_priority",
+      "call_manager_mini_task_stack_size",
+      "call_manager_mini_queue_size",
+      "call_manager_mini_sync_wait_ms",
+      "call_manager_mini_max_sync_waiters",
+      "call_manager_mini_max_call_objects",
+      "call_manager_mini_max_delayed_tasks",
+      "call_manager_mini_pacmap_max_entries",
+      "call_manager_mini_slot_count",
+      "call_manager_mini_granted_permissions",
+      "call_manager_mini_caller_is_system_app",
+      "call_manager_mini_caller_bundle_name",
+      "call_manager_mini_log_printf"
+    ],
+    "adapted_system_type": [
+      "mini"
+    ],
+    "rom": "",
+    "ram": "",
+    "deps": {
+      "components": [
+        "bounds_checking_function",
+        "core_service",
+        "init",
+        "liteos_m",
+        "samgr_lite",
+        "utils_lite"
+      ],
+      "third_party": []
+    },
+    "build": {
+      "sub_component": [
+        "//base/telephony/call_manager_mini:call_manager_mini"
+      ],
+      "inner_kits": [
+        {
+          "name": "//base/telephony/call_manager_mini:tel_call_manager_mini",
+          "header": {
+            "header_files": [
+              "call_manager_client.h",
+              "call_manager_callback.h",
+              "call_manager_errors.h",
+              "call_manager_info.h"
+            ],
+            "header_base": "//base/telephony/call_manager_mini/interfaces/innerkits"
+          }
+        },
+        {
+          "name": "//base/telephony/call_manager_mini:tel_call_manager_mini",
+          "header": {
+            "header_files": [
+              "call_audio_lite_interface.h",
+              "cellular_call_lite_interface.h",
+              "core_service_lite_interface.h"
+            ],
+            "header_base": "//base/telephony/call_manager_mini/interfaces/innerkits/mini"
+          }
+        }
+      ],
+      "test": []
+    }
+  }
+}

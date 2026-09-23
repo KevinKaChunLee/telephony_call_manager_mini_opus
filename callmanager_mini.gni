@@ -1,0 +1,147 @@
+# Copyright (C) 2026 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Single source of truth for the Mini (LiteOS-M) call manager build. The
+# component include directories and their order must match
+# test/mini/mini_selftest.sh and the LiteOS harness gate (run_mini_cmsis.sh);
+# test/mini/tools/check_mini_layout.py enforces it, together with this source
+# list against the files in the tree.
+
+declare_args() {
+  call_manager_mini_task_priority = 24
+  call_manager_mini_task_stack_size = 16384
+  call_manager_mini_queue_size = 16
+  call_manager_mini_sync_wait_ms = 3000
+  call_manager_mini_max_sync_waiters = 2
+  call_manager_mini_max_call_objects = 5
+  call_manager_mini_max_delayed_tasks = 8
+  call_manager_mini_pacmap_max_entries = 32
+  call_manager_mini_slot_count = 2
+
+  # Trust model of the single image; the default grants nothing (see design D9).
+  call_manager_mini_granted_permissions = []
+  call_manager_mini_caller_is_system_app = false
+  call_manager_mini_caller_bundle_name = ""
+
+  call_manager_mini_log_printf = true
+}
+
+call_manager_mini_path = "//base/telephony/call_manager_mini"
+
+call_manager_mini_sources = [
+  "${call_manager_mini_path}/frameworks/native/src/call_manager_client.cpp",
+  "${call_manager_mini_path}/frameworks/native/src/mini/call_manager_proxy.cpp",
+  "${call_manager_mini_path}/services/audio/src/mini/audio_control_manager.cpp",
+  "${call_manager_mini_path}/services/call/src/mini/call_base.cpp",
+  "${call_manager_mini_path}/services/call/src/mini/call_control_manager.cpp",
+  "${call_manager_mini_path}/services/call/src/mini/call_object_manager.cpp",
+  "${call_manager_mini_path}/services/call/src/mini/call_policy.cpp",
+  "${call_manager_mini_path}/services/call/src/mini/call_request_event_handler_helper.cpp",
+  "${call_manager_mini_path}/services/call/src/mini/call_request_handler.cpp",
+  "${call_manager_mini_path}/services/call/src/mini/call_request_process.cpp",
+  "${call_manager_mini_path}/services/call/src/mini/call_state_listener.cpp",
+  "${call_manager_mini_path}/services/call/src/mini/call_status_manager.cpp",
+  "${call_manager_mini_path}/services/call/src/mini/call_status_policy.cpp",
+  "${call_manager_mini_path}/services/call/src/mini/carrier_call.cpp",
+  "${call_manager_mini_path}/services/call/src/mini/conference_base.cpp",
+  "${call_manager_mini_path}/services/call/src/mini/cs_call.cpp",
+  "${call_manager_mini_path}/services/call/src/mini/cs_conference.cpp",
+  "${call_manager_mini_path}/services/call/src/mini/ims_call.cpp",
+  "${call_manager_mini_path}/services/call/src/mini/ims_conference.cpp",
+  "${call_manager_mini_path}/services/call_manager_service/src/mini/call_manager_service.cpp",
+  "${call_manager_mini_path}/services/call_manager_service/src/mini/call_manager_service_lite.cpp",
+  "${call_manager_mini_path}/services/call_report/src/mini/call_ability_report_proxy.cpp",
+  "${call_manager_mini_path}/services/telephony_interaction/src/mini/call_status_callback.cpp",
+  "${call_manager_mini_path}/services/telephony_interaction/src/mini/call_status_callback_guard.cpp",
+  "${call_manager_mini_path}/services/telephony_interaction/src/mini/cellular_call_connection.cpp",
+  "${call_manager_mini_path}/services/telephony_interaction/src/mini/core_service_client.cpp",
+  "${call_manager_mini_path}/services/telephony_interaction/src/mini/report_call_info_handler.cpp",
+  "${call_manager_mini_path}/utils/mini/src/call_number_utils.cpp",
+  "${call_manager_mini_path}/utils/mini/src/call_permission_adapter.cpp",
+  "${call_manager_mini_path}/utils/mini/src/ffrt_confined.cpp",
+  "${call_manager_mini_path}/utils/mini/src/los_event_handler.cpp",
+  "${call_manager_mini_path}/utils/mini/src/pac_map.cpp",
+  "${call_manager_mini_path}/utils/mini/src/refbase.cpp",
+  "${call_manager_mini_path}/utils/mini/src/string_ex.cpp",
+  "${call_manager_mini_path}/utils/mini/src/tel_mini_registry.cpp",
+  "${call_manager_mini_path}/utils/mini/src/tel_os_adapter_cmsis.cpp",
+  "${call_manager_mini_path}/utils/mini/src/tel_os_common.cpp",
+  "${call_manager_mini_path}/utils/mini/src/telephony_log_mini.cpp",
+]
+
+call_manager_mini_include_dirs = [
+  "${call_manager_mini_path}/utils/mini/include",
+  "${call_manager_mini_path}/interfaces/innerkits/mini",
+  "${call_manager_mini_path}/frameworks/native/include/mini",
+  "${call_manager_mini_path}/services/audio/include/mini",
+  "${call_manager_mini_path}/services/call/include/mini",
+  "${call_manager_mini_path}/services/call_manager_service/include/mini",
+  "${call_manager_mini_path}/services/call_report/include/mini",
+  "${call_manager_mini_path}/services/telephony_interaction/include/mini",
+  "${call_manager_mini_path}/interfaces/innerkits",
+  "${call_manager_mini_path}/services/call/include",
+]
+
+# Other components' headers come last so that they can never shadow a Mini or
+# vendored header.
+call_manager_mini_external_include_dirs = [
+  "//kernel/liteos_m/kal/cmsis",
+  "//kernel/liteos_m/kernel/include",
+  "//kernel/liteos_m/utils",
+  "//foundation/systemabilitymgr/samgr_lite/interfaces/kits/samgr",
+  "//commonlibrary/utils_lite/include",
+  "//third_party/bounds_checking_function/include",
+  "//base/startup/init/interfaces/innerkits/include/syspara",
+  "//base/telephony/core_service/interfaces/innerkits/include",
+]
+
+_granted_permissions = ""
+foreach(permission, call_manager_mini_granted_permissions) {
+  _granted_permissions += permission + ";"
+}
+
+call_manager_mini_defines = [
+  "TELEPHONY_MINI_SYSTEM",
+  "CALL_MANAGER_MINI_TASK_PRIORITY=${call_manager_mini_task_priority}",
+  "CALL_MANAGER_MINI_TASK_STACK_SIZE=${call_manager_mini_task_stack_size}",
+  "CALL_MANAGER_MINI_QUEUE_SIZE=${call_manager_mini_queue_size}",
+  "CALL_MANAGER_MINI_SYNC_WAIT_MS=${call_manager_mini_sync_wait_ms}",
+  "CALL_MANAGER_MINI_MAX_SYNC_WAITERS=${call_manager_mini_max_sync_waiters}",
+  "CALL_MANAGER_MINI_MAX_CALL_OBJECTS=${call_manager_mini_max_call_objects}",
+  "CALL_MANAGER_MINI_MAX_DELAYED_TASKS=${call_manager_mini_max_delayed_tasks}",
+  "CALL_MANAGER_MINI_PACMAP_MAX_ENTRIES=${call_manager_mini_pacmap_max_entries}",
+  "CALL_MANAGER_MINI_SLOT_COUNT=${call_manager_mini_slot_count}",
+  "CALL_MANAGER_MINI_GRANTED_PERMISSIONS=\"${_granted_permissions}\"",
+  "CALL_MANAGER_MINI_CALLER_BUNDLE_NAME=\"${call_manager_mini_caller_bundle_name}\"",
+]
+if (call_manager_mini_caller_is_system_app) {
+  call_manager_mini_defines += [ "CALL_MANAGER_MINI_CALLER_IS_SYSTEM_APP" ]
+}
+if (call_manager_mini_log_printf) {
+  call_manager_mini_defines += [ "TELEPHONY_MINI_LOG_PRINTF" ]
+}
+
+# Same warning set and security options as the host gates, optimized for size.
+call_manager_mini_cflags_cc = [
+  "-std=c++17",
+  "-Os",
+  "-fno-exceptions",
+  "-fno-rtti",
+  "-fstack-protector-all",
+  "-Wall",
+  "-Wextra",
+  "-Wunused",
+  "-Wunreachable-code",
+  "-Wno-unused-parameter",
+  "-Werror",
+]
